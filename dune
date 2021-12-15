@@ -1,0 +1,6 @@
+(library
+ (name MerkelTree)
+ (libraries Core))
+(env
+  (dev
+    (flags (:standard -warn-error -A -w -33 -w -32))))
