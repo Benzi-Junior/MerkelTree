@@ -1,5 +1,5 @@
 (* The merkelTree type, all vertices are represented by the same record, leafs are simply those vertices that have an empty list of children*)
-type merkelTree = { hash : int ; children : merkelTree list;};;
+type 'a merkelTree = { hash : int ; children : 'a merkelTree list;};;
 
 
 
@@ -13,7 +13,7 @@ let pprint tree =
 	let rec front n = match n with
 		| 0 -> "";
 		| n -> "\t" ^ (front (n-1)); in
-	let rec aux (n:int) (t:merkelTree) = "\n" ^ (front n) ^ (string_of_int t.hash) ^ (String.concat "" (List.map (aux (n+1)) t.children));
+	let rec aux n t = "\n" ^ (front n) ^ (string_of_int t.hash) ^ (String.concat "" (List.map (aux (n+1)) t.children));
 	in aux 0 tree;;
 
                                                                   
