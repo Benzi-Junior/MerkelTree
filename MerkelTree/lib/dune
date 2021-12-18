@@ -1,8 +1,4 @@
 (library
  (public_name MerkelTree)
  (name MerkelTree))
-(env
-  (dev
-    (flags (:standard -w -32))))
-
 

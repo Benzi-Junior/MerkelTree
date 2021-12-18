@@ -1,5 +1,6 @@
 
 (*I alias the hash function and the hash in order to replace them with a better function later*)
+(*TODO replace with a better hash function *)
 type hash = int
 let hashFun = Hashtbl.hash
 
@@ -12,10 +13,8 @@ let getHash t = match t with
 	| Leaf (h,_)		-> h
 
 let makeLeaf v = Leaf ((hashFun v), v)
-
+(*here I am making an assumption that the hash will be an algebraic type, and if that algebra is commutative this is a significant weakening of the proof strength*)
 let join l r = Internal ((hashFun ((getHash l)+(getHash r))), l, r)
-
-
 
 let rec  string_of_tree t = match t with 
 	| Internal (h,l,r)	-> (string_of_int h)  ^ " with (" ^ (string_of_tree l) ^ (string_of_tree r) ^ ")"
@@ -41,5 +40,25 @@ let makeBinaryMerkel l = print_endline "making";
 		| l 		-> stackUp l;
 	in stackUp (List.map makeLeaf l);;
 
+(*TODO put proofs into their own datatype to simplify their structure  and reverse their order (so confirming the proof works towards root)*)
+
+(*attempts to generate a proof for a given value being in the set that created the tree*)
+let rec  trimProof tree value = match tree with
+	| Internal (h,l,r)	-> (match ((trimProof l value), (trimProof r value)) with
+		| (None,None)	-> None
+		| (None,Some t)	-> Some (Internal (h,Leaf (getHash l,value),t))
+		| (Some t,None)	-> Some (Internal (h,t,Leaf (getHash r,value)))
+		| (_,_)		-> Some tree)
+	| Leaf (_,v)	-> (match v with 
+		| v when v=value -> Some (tree) 
+		| _	-> None)
 
 
+
+(*takes a tree and a proof and checks that proof is valid for that tree
+The proof is run backwards, first confirming that the root is the same and then going down the tree*)
+let rec prove root proof = match proof with 
+	| Internal (h,l,r)	-> (match (hashFun((getHash l)+(getHash r))=h)&&(h=root) with
+		| false	-> false
+		| true	-> prove h l || prove h r)
+	| Leaf (h,v)		-> hashFun v = h

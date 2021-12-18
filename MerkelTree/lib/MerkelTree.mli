@@ -19,3 +19,8 @@ val string_of_tree : 'a merkelTree -> string
 
 (* a pretty print function which lays the tree out in a multiline setup*)
 val pprint : 'a merkelTree -> string
+
+val trimProof : 'a merkelTree -> 'a -> 'a merkelTree option
+
+type hash
+val prove : hash -> 'a merkelTree -> bool
