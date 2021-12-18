@@ -9,7 +9,7 @@ type 'a merkelTree
 val makeLeaf : 'a -> 'a merkelTree
 
 (*join takes a list of tree nodes and creates a new node with all of them as children*)
-val join :'a  merkelTree list -> 'a merkelTree
+val join :'a  merkelTree  -> 'a merkelTree  -> 'a merkelTree
 
 (* takes a list of values and creates a binary Merkel tree hashing those values*)
 val makeBinaryMerkel : 'a list -> 'a merkelTree
