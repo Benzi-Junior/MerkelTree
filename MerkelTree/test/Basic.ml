@@ -11,6 +11,3 @@ let () =
 	print_endline (string_of_tree (join (makeLeaf 0) (makeLeaf 1)));
 	print_endline (pprint t);
 	print_endline (pprint (Option.get (trimProof t 1)));
-	match (prove (getHash t) (Option.get (trimProof t 1))) with	
-		| True	-> print_endline "1 was in the set"	
-		| False	-> print_endline "1 wasn't in the set"	
