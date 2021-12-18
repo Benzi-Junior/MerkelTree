@@ -5,6 +5,8 @@ The merkelTree type.
 *)
 type 'a merkelTree
 
+
+
 (*takes a value x  and creates a leaf holding the hash of x*)
 val makeLeaf : 'a -> 'a merkelTree
 

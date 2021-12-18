@@ -42,7 +42,8 @@ let makeBinaryMerkel l = print_endline "making";
 
 (*TODO put proofs into their own datatype to simplify their structure  and reverse their order (so confirming the proof works towards root)*)
 
-(*attempts to generate a proof for a given value being in the set that created the tree*)
+(*attempts to generate a proof for a given value being in the set that created the tree
+The proof is represented by a subtree of those vertices that are *)
 let rec  trimProof tree value = match tree with
 	| Internal (h,l,r)	-> (match ((trimProof l value), (trimProof r value)) with
 		| (None,None)	-> None
