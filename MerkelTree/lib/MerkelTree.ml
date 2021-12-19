@@ -1,12 +1,22 @@
 open Cryptokit
-(*I alias the hash function and the hash in order to replace them with a better function later*)
-(*TODO replace with a better hash function *)
-(*
-type hash = string
-let toHash t = t
-*)
-let hashFun = hash_string  (Hash.sha256 ())
 
+(*
+module type Hashable = sig
+  type t
+  val show: t -> string
+end
+
+module MyHash (H: Hashable) = struct
+	let hhhash l = hash_string (Hash.sha256 ()) (hash_string  (Hash.sha256 ()) (H.show l))
+end
+
+(* You can now use instantiate the functor *)
+module HashInt = struct
+  let show = string_of_int
+end
+
+*)
+let hashFun a  = hash_string (Hash.sha256 ()) (hash_string  (Hash.sha256 ())  (a))
 type 'a merkelTree = 
 	| Internal of string * 'a merkelTree * 'a merkelTree 
 	| Leaf of string * 'a 
