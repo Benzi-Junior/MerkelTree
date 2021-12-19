@@ -23,6 +23,5 @@ val pprint : 'a merkelTree -> string
 
 val trimProof : 'a merkelTree -> 'a -> 'a merkelTree option
 
-type hash
-val toHash : int -> hash
-val prove : hash -> 'a merkelTree -> bool
+val prove : string -> 'a merkelTree -> bool
+
