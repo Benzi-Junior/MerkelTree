@@ -2,6 +2,7 @@
 (*I alias the hash function and the hash in order to replace them with a better function later*)
 (*TODO replace with a better hash function *)
 type hash = int
+let toHash t = t
 let hashFun = Hashtbl.hash
 
 type 'a merkelTree = 
@@ -30,7 +31,7 @@ let pprint tree =
 	in aux 0 tree;;
                                                                   
 
-let makeBinaryMerkel l = print_endline "making"; 
+let makeBinaryMerkel l = 
 	let rec pairOff l = match l with
 		| fst :: snd :: rst	-> (join fst snd) :: pairOff rst;
 		| fst :: []		-> (fst)::[];
@@ -61,5 +62,5 @@ The proof is run backwards, first confirming that the root is the same and then 
 let rec prove root proof = match proof with 
 	| Internal (h,l,r)	-> (match (hashFun((getHash l)+(getHash r))=h)&&(h=root) with
 		| false	-> false
-		| true	-> prove h l || prove h r)
+		| true	-> prove (getHash l) l || prove (getHash r) r)
 	| Leaf (h,v)		-> hashFun v = h

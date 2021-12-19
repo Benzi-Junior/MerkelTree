@@ -1,6 +1,1 @@
-
-(test (name Basic) (libraries MerkelTree))
-(env
-  (dev
-    (flags (:standard -w -33))))
-
+(test (name Alcotests) (libraries MerkelTree alcotest))

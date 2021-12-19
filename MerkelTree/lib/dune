@@ -1,4 +1,5 @@
 (library
  (public_name MerkelTree)
- (name MerkelTree))
+ (name MerkelTree)
+ (libraries cryptokit))
 

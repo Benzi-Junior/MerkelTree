@@ -6,7 +6,6 @@ The merkelTree type.
 type 'a merkelTree
 
 
-
 (*takes a value x  and creates a leaf holding the hash of x*)
 val makeLeaf : 'a -> 'a merkelTree
 
@@ -25,4 +24,5 @@ val pprint : 'a merkelTree -> string
 val trimProof : 'a merkelTree -> 'a -> 'a merkelTree option
 
 type hash
+val toHash : int -> hash
 val prove : hash -> 'a merkelTree -> bool
