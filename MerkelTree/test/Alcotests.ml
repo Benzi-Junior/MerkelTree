@@ -10,7 +10,7 @@ let testTrimmer () = (check bool) "" true ((Option.get (trimProof tp "1"))=tp)
 
 let testProof1 () = (check bool) "" true (prove (getHash t) p "1");;
 
-let testProof2 () = (check bool) "" false (prove "" p "1");;
+let testProof2 () = (check bool) "" false (prove (getHash t) p "0");;
 
 
 

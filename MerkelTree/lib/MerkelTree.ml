@@ -1,8 +1,6 @@
-
 open Cryptokit
 let hashFun a  = hash_string (Hash.sha256 ()) (hash_string  (Hash.sha256 ())  (a))
 
-(*let hashFun a  = a*)
 
 type 'a merkelTree = 
 	| Internal of string * 'a merkelTree * 'a merkelTree 
